@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRZ Bot Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f111a, #111827);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .glass-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 600px;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+
+    nav a {
+      color: #bbb;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    nav a.active,
+    nav a:hover {
+      color: white;
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 2px;
+      width: 30%;
+      background-color: #3399ff;
+      border-radius: 10px;
+    }
+
+    .dashboard-button {
+      width: 100%;
+      padding: 12px;
+      background: #3399ff;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard-button:hover {
+      background: #4dabff;
+    }
+
+    .commands-list {
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .commands-list h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+    }
+
+    ul.commands {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul.commands li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 1rem;
+    }
+
+    .footer {
+      margin-top: auto;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Page 2 styles */
+    #commands-page {
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 450px;
+      padding: 1.5rem 2rem;
+      position: relative;
+      min-height: 600px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    #commands-page h2 {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+      font-size: 1.2rem;
+    }
+
+    #commands-page ul.commands {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1rem;
+    }
+
+    #commands-page ul.commands li {
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .back-button {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 6px 12px;
+      background: #3399ff;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .back-button:hover {
+      background: #4dabff;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Main Page -->
+  <div class="glass-container" id="main-page">
+    <div class="logo">
+      <h1>TRZ Bot</h1>
+    </div>
+
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="#">About</a>
+      <a href="#">Status</a>
+      <a href="#">Custom Branding</a>
+    </nav>
+
+    <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank">
+      <button class="dashboard-button">Invite TRZ Bot</button>
+    </a>
+
+    <button class="dashboard-button" id="commands-btn">Commands</button>
+
+    <div class="footer">© 2025 TRZ Bot. All rights reserved.</div>
+  </div>
+
+  <!-- Commands Page -->
+  <div id="commands-page">
+    <button class="back-button" id="back-btn">&larr; Back</button>
+    <h2>Available Commands</h2>
+    <ul class="commands">
+      <li>add &lt;name&gt; &lt;response&gt; - Add a new command</li>
+      <li>edit &lt;name&gt; &lt;new_response&gt; - Edit an existing command</li>
+      <li>delete &lt;name&gt; - Delete a command</li>
+      <li>list - List all commands</li>
+      <li>info &lt;name&gt; - Get command information</li>
+      <li>search &lt;query&gt; - Search commands</li>
+      <li>stats - Bot statistics</li>
+      <li>export - Export all commands</li>
+      <li>import &lt;json&gt; - Import commands from JSON</li>
+      <li>button &lt;message&gt; &lt;button1&gt; [button2] ... - Create clickable buttons</li>
+      <li>lock - Lock current channel</li>
+      <li>unlock - Unlock current channel</li>
+      <li>ban &lt;@user&gt; [reason] - Ban a user</li>
+      <li>kick &lt;@user&gt; [reason] - Kick a user</li>
+      <li>timeout &lt;@user&gt; &lt;minutes&gt; [reason] - Timeout user</li>
+      <li>unban &lt;user_id&gt; [reason] - Unban a user</li>
+      <li>addrole &lt;@user&gt; &lt;role&gt; - Add role to user</li>
+      <li>play &lt;YouTube URL&gt; - Play music</li>
+      <li>join - Join your voice channel</li>
+      <li>leave - Leave voice channel</li>
+      <li>pause - Pause/resume music</li>
+      <li>welcome &lt;message&gt; - Set welcome message</li>
+      <li>farewell &lt;message&gt; - Set farewell message</li>
+      <li>serverinfo - Show detailed server info</li>
+      <li>level [@user] - Check user level</li>
+      <li>rank [@user] - Same as level</li>
+      <li>levelconfig &lt;enable/disable&gt; - Toggle level system</li>
+      <li>levelrole &lt;level&gt; &lt;role&gt; - Set role rewards</li>
+    </ul>
+  </div>
+
+  <script>
+    const mainPage = document.getElementById('main-page');
+    const commandsPage = document.getElementById('commands-page');
+    const commandsBtn = document.getElementById('commands-btn');
+    const backBtn = document.getElementById
